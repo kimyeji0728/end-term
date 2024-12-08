@@ -20,7 +20,7 @@ class Ring {
     for (let p of this.particles) {
       // 힘을 적용하여 위치 업데이트
       p.pos.add(p.force);
-      p.force.mult(0.95); // 힘을 서서히 감소시켜 안정화
+      p.force.mult(0.75); // 힘을 서서히 감소시켜 안정화
     }
   }
 
