@@ -1,4 +1,3 @@
-// Ring 클래스 정의
 class Ring {
   constructor(center, radius, particleCount) {
     this.center = center; // 중심(메인 파티클)
@@ -20,7 +19,7 @@ class Ring {
     for (let p of this.particles) {
       // 힘을 적용하여 위치 업데이트
       p.pos.add(p.force);
-      p.force.mult(0.75); // 힘을 서서히 감소시켜 안정화
+      p.force.mult(0.95); // 힘을 서서히 감소시켜 안정화
     }
   }
 
@@ -33,14 +32,16 @@ class Ring {
   }
 
   // 메인 파티클에 의해 밀어내는 힘을 계산하고 적용하는 함수
-  applyRepulsion(main) {
-    for (let p of this.particles) {
-      let dir = p.pos.copy().sub(main.pos); // 메인 파티클로부터의 방향 벡터
-      let distance = dir.mag(); // 거리 계산
-      dir.normalize(); // 방향만 남김
-      let forceMagnitude = map(distance, 0, width / 2, 10, 50); // 거리 기반 힘 크기
-      p.force = dir.mult(forceMagnitude); // 방향에 따라 힘 적용
-    }
+  applyRepulsion(main, delay, strengthMultiplier) {
+    setTimeout(() => {
+      for (let p of this.particles) {
+        let dir = p.pos.copy().sub(main.pos); // 메인 파티클로부터의 방향 벡터
+        let distance = dir.mag(); // 거리 계산
+        dir.normalize(); // 방향만 남김
+        let forceMagnitude = map(distance, 0, width / 2, 10, 50) * strengthMultiplier; // 거리 기반 힘 크기
+        p.force = dir.mult(forceMagnitude); // 방향에 따라 힘 적용
+      }
+    }, delay);
   }
 
   // 원래 위치로 돌아가는 복원력을 계산하고 적용

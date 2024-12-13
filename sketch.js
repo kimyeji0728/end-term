@@ -27,8 +27,10 @@ function draw() {
 // 마우스 클릭 시 밀어내는 힘 적용
 function mousePressed() {
   isRepelling = true;
-  for (let ring of rings) {
-    ring.applyRepulsion(mainParticle);
+  for (let i = 0; i < rings.length; i++) {
+    let delay = i * 100; // 순차적인 지연 시간 (200ms 간격)
+    let strengthMultiplier = 1 + i * 0.5; // 각 띠마다 힘의 강도 증가
+    rings[i].applyRepulsion(mainParticle, delay, strengthMultiplier);
   }
 }
 
