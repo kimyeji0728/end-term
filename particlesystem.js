@@ -50,7 +50,7 @@ class Ring {
       let dir = p.originalPos.copy().sub(p.pos); // 현재 위치에서 원래 위치로의 방향
       let distance = dir.mag(); // 거리 계산
       dir.normalize(); // 방향만 남김
-      let restorationForce = dir.mult(distance * 0.1); // 복원력 크기 (거리 비례)
+      let restorationForce = dir.mult(distance * 0.001); // 복원력 크기 (거리 비례)
       p.force.add(restorationForce); // 복원력 추가
     }
   }
