@@ -5,10 +5,13 @@ let isRepelling = false; // 현재 밀어내는 상태인지 여부
 function setup() {
   createCanvas(800, 800);
   mainParticle = new Particle(width / 2, height / 2, 30, color(255, 100, 100)); // 메인 파티클
+  
   // 띠 생성
   let numRings = 3; // 띠의 개수
   for (let i = 1; i <= numRings; i++) {
-    rings.push(new Ring(mainParticle, i * 100, 12)); // 각 띠의 반지름과 입자 개수 설정
+    let ring = new Ring(mainParticle, i * 100, 12); // 각 띠의 반지름과 입자 개수 설정
+    ring.initializeRandomParticles(200); // 랜덤 워커 입자 초기화 (약 200개)
+    rings.push(ring);
   }
 }
 
